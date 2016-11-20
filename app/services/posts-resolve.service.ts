@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 
-import { Post } from "../models/post";
+import { Post } from '../models/post';
 import { PostService } from "./post.service";
 
 @Injectable()
@@ -19,7 +19,10 @@ export class PostsResolve implements Resolve<Post[]> {
          | a un usuario, llame a la función 'getUserPosts()' del servicio PostService. Recuerda    |
          | mirar en los parámetros de la ruta, a ver qué encuentras.                               |
          |-----------------------------------------------------------------------------------------*/
-
+        
+        if (route.params.userId != null) {
+            return this._postService.getUserPosts(route.params.userId);    
+        } else
         /*-----------------------------------------------------------------------------------------|
          | ~~~ Yellow Path ~~~                                                                     |
          |-----------------------------------------------------------------------------------------|
@@ -27,7 +30,12 @@ export class PostsResolve implements Resolve<Post[]> {
          | a una categoría, llame a la función 'getCategoryPosts()' del servicio PostService.      |
          | Recuerda mirar en los parámetros de la ruta, a ver qué encuentras.                      |
          |-----------------------------------------------------------------------------------------*/
-
-        return this._postService.getPosts();
+        // if ( route.params.category != null ) {
+        //     return this._postService.getPosts();
+        // } else 
+        {
+            return this._postService.getPosts();
+        }
+        
     }
 }
