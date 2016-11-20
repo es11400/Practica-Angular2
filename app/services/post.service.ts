@@ -16,7 +16,7 @@ export class PostService {
     getPosts(): Observable<Post[]> {
 
         /*----------------------------------------------------------------------------------------------|
-         | ~~~ Red Path ~~~                                                                             |
+         | ~~~ Pink Path ~~~                                                                             |
          |----------------------------------------------------------------------------------------------|
          | Pide al servidor que te retorne los posts ordenados de más reciente a menos, teniendo en     |
          | cuenta su fecha de publicación. Filtra también aquellos que aún no están publicados, pues no |
@@ -31,7 +31,7 @@ export class PostService {
          |----------------------------------------------------------------------------------------------*/
 
         return this._http
-                   .get(`${this._backendUri}/posts`)
+                   .get(`${this._backendUri}/posts?publicationDate_lte=${Date.now()}&_sort=publicationDate&_order=DESC`)
                    .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
