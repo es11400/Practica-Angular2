@@ -12,7 +12,7 @@ import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing";
 import { AutoGrowDirective } from "./directives/auto-grow.directive";
-import { BackendUriProvider} from "./services/settings.service";
+import { BackendUriProvider, DireccionFakerImageProvider } from './services/settings.service';
 import { CategoryBoxComponent } from "./components/category-box/category-box.component";
 import { CategoryPostsComponent } from "./components/category-posts/category-posts.component";
 import { CategoryService } from "./services/category.service";
@@ -62,6 +62,7 @@ import { FromNowPipe } from "./pipes/from-now.pipe";
     ],
     providers: [
         BackendUriProvider,
+        DireccionFakerImageProvider,
         CategoryService,
         PostDetailsResolve,
         PostService,

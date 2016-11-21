@@ -3,7 +3,7 @@ import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 
-import { BackendUri } from "./settings.service";
+import { BackendUri, DireccionFakerImage } from './settings.service';
 import { Post } from "../models/post";
 import { Category } from '../models/category';
 
@@ -12,7 +12,8 @@ export class PostService {
 
     constructor(
         private _http: Http,
-        @Inject(BackendUri) private _backendUri) { }
+        @Inject(BackendUri) private _backendUri,
+        @Inject(DireccionFakerImage) private _direccionFakerImagen) { }
 
     getPosts(): Observable<Post[]> {
 
@@ -109,6 +110,27 @@ export class PostService {
          | 'fromJson() para crar un nuevo objeto Post basado en la respuesta HTTP obtenida. |
          |----------------------------------------------------------------------------------*/
 
-        return null;
+        return this._http
+                  
+                   .post(`${this._backendUri}/posts`, post)
+                   .map((respuesta: Response) => {
+                       let json = respuesta.json();
+                       return Post.fromJson(json);
+                   });
+    }
+
+        // Obtenemos un avatar aleatorio.
+    generarRutaImagen(): Observable<string> {
+        return this._http
+                    .get(this._direccionFakerImagen)
+                    .map((respuesta: Response) => {
+                        // Obtenemos el cuerpo de la respuesta en formato JSON.
+                        let rutaImagen = respuesta.text();
+                        // Usamos expresiones regulares para reparar la rutaAvatar.
+                        rutaImagen = rutaImagen.replace(/\"/gi, "");
+                        rutaImagen = rutaImagen.replace(/\n/gi, "");
+                        
+                        return rutaImagen;
+                    });
     }
 }

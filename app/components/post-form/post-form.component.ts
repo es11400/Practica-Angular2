@@ -3,6 +3,7 @@ import { FormGroup } from "@angular/forms";
 
 import { Post } from "../../models/post";
 import { User } from "../../models/user";
+import { PostService } from '../../services/post.service';
 
 @Component({
     selector: "post-form",
@@ -11,13 +12,18 @@ import { User } from "../../models/user";
 })
 export class PostFormComponent implements OnInit {
 
+    rutaImagen: string = ""
     nowDatetimeLocal: string;
     publicationDateScheduled: boolean = false;
 
     @Output() postSubmitted: EventEmitter<Post> = new EventEmitter();
 
+    constructor(private _postService: PostService) { }
+
     ngOnInit(): void {
         this.nowDatetimeLocal = this._formatDateToDatetimeLocal(new Date());
+        this._postService.generarRutaImagen()
+                              .subscribe(ruta => this.rutaImagen = ruta);
     }
 
     private _formatDateToDatetimeLocal(date: Date) {
@@ -66,6 +72,7 @@ export class PostFormComponent implements OnInit {
         post.likes = 0;
         post.author = User.defaultUser();
         post.publicationDate = this._getPostPublicationDate(form.value.publicationDate);
+        post.media = this.rutaImagen;
         this.postSubmitted.emit(post);
     }
 }

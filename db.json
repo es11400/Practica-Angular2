@@ -251,6 +251,21 @@
       ],
       "likes": 4,
       "id": 10
+    },
+    {
+      "title": "Primer post prueba",
+      "intro": "historia primer post prueba",
+      "body": "body primer post",
+      "publicationDate": 1479693589918,
+      "author": {
+        "id": 1,
+        "name": "KeepCoder",
+        "username": "keepcoder",
+        "email": "keepcoder@postium.com",
+        "avatar": "images/keepcoder.jpg"
+      },
+      "likes": 0,
+      "id": 11
     }
   ],
   "categories": [
