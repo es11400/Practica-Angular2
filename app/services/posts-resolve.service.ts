@@ -19,7 +19,7 @@ export class PostsResolve implements Resolve<Post[]> {
          | a un usuario, llame a la función 'getUserPosts()' del servicio PostService. Recuerda    |
          | mirar en los parámetros de la ruta, a ver qué encuentras.                               |
          |-----------------------------------------------------------------------------------------*/
-        
+        //console.log(route.params);
         if (route.params.userId != null) {
             return this._postService.getUserPosts(route.params.userId);    
         } else
@@ -30,9 +30,9 @@ export class PostsResolve implements Resolve<Post[]> {
          | a una categoría, llame a la función 'getCategoryPosts()' del servicio PostService.      |
          | Recuerda mirar en los parámetros de la ruta, a ver qué encuentras.                      |
          |-----------------------------------------------------------------------------------------*/
-        // if ( route.params.category != null ) {
-        //     return this._postService.getPosts();
-        // } else 
+        if ( route.params.categoryId != null ) {
+            return this._postService.getCategoryPosts(route.params.categoryId);
+        } else 
         {
             return this._postService.getPosts();
         }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Post } from "../../models/post";
 import { User } from "../../models/user";
+import { Category } from '../../models/category';
 
 @Component({
     templateUrl: "./app/components/post-details/post-details.component.html",
@@ -44,4 +45,9 @@ export class PostDetailsComponent implements OnInit {
      | pasando como parámetro el identificador de la categoría.                                                           |
      |--------------------------------------------------------------------------------------------------------------------*/
 
+    notificarCategoriaIdSeleccionada(categoria: Category) {
+
+        this.router.navigate(['/posts/categories', categoria.id]);
+    }
+        
 }
