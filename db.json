@@ -289,7 +289,23 @@
           "name": "Poor thing"
         }
       ]
+    },
+    {
+      "title": "Prueba con categorias vacias",
+      "intro": "historia con categorias vacias",
+      "body": "Esta es la historia de las categorias vacias",
+      "media": "http://lorempixel.com/640/480",
+      "publicationDate": 1479762750122,
+      "categories": [],
+      "author": {
+        "id": 1,
+        "name": "KeepCoder",
+        "username": "keepcoder",
+        "email": "keepcoder@postium.com",
+        "avatar": "resources/images/keepcoder.jpg"
+      },
+      "likes": 0,
+      "id": 13
     }
-    
   ]
 }

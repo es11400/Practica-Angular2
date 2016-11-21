@@ -71,6 +71,7 @@ export class PostFormComponent implements OnInit {
         let post: Post = Post.fromJson(form.value);
         post.likes = 0;
         post.author = User.defaultUser();
+        post.categories = [];
         post.publicationDate = this._getPostPublicationDate(form.value.publicationDate);
         post.media = this.rutaImagen;
         this.postSubmitted.emit(post);
