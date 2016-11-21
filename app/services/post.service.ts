@@ -61,8 +61,8 @@ export class PostService {
                    .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
-    getCategoryPosts(categoria: Category): Observable<Post[]> {
-
+    getCategoryPosts(categoria: number): Observable<Post[]> {
+        
         /*--------------------------------------------------------------------------------------------------|
          | ~~~ Yellow Path ~~~                                                                              |
          |--------------------------------------------------------------------------------------------------|
@@ -85,13 +85,24 @@ export class PostService {
          |--------------------------------------------------------------------------------------------------*/
 
         return this._http
-                   .get(`${this._backendUri}/posts?publicationDate_lte=${Date.now()}&_sort=publicationDate&_order=DESC`)
-                   .map((response: Response) => {
+                  .get(`${this._backendUri}/posts?publicationDate_lte=${Date.now()}&_sort=publicationDate&_order=DESC`)
+                  .map((response: Response) => {
                         let posts = Post.fromJsonToList(response.json());
-                        return posts.filter((p: Post) => categoria.id in p.categories);
-                   });
+                        return posts.filter((p: Post) => {
+                            let categoriasPost: Category[] = p.categories;
+                            if (categoriasPost.length > 0) {   
+                                return p.categories.filter((c: Category) => {
+                                    let cat: Category = c;
+                                    return cat.id == categoria ? true : false;
+                                }).length > 0;
+                            } else {
+                                return false;
+                            }    
+                           
+                       })});
+                       
     }
-
+ // console.log(`${c.id} / ${categoria}`);
     getPostDetails(id: number): Observable<Post> {
         return this._http
                    .get(`${this._backendUri}/posts/${id}`)
@@ -119,7 +130,7 @@ export class PostService {
                    });
     }
 
-        // Obtenemos un avatar aleatorio.
+    // Obtenemos un avatar aleatorio.
     generarRutaImagen(): Observable<string> {
         return this._http
                     .get(this._direccionFakerImagen)
@@ -132,5 +143,17 @@ export class PostService {
                         
                         return rutaImagen;
                     });
+    }
+
+    editPost(post: Post): Observable<Post> {
+    /*----------------------------------------------------------------------------------------------|
+    | ~~~ Broken White Path ~~~ Edicion de posts                                                    |
+    |----------------------------------------------------------------------------------------------|*/
+        return this._http
+                   .post(`${this._backendUri}/posts`, post)
+                   .map((respuesta: Response) => {
+                       let json = respuesta.json();
+                       return Post.fromJson(json);
+                   });
     }
 }
