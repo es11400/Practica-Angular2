@@ -43,4 +43,16 @@ export class PostPreviewComponent {
     plainTextToHtml(text: string): string {
         return `<p>${text.replace(/\n/gi, "</p><p>")}</p>`;
     }
+
+    /*------------------------------------------------------------------------------------------------------------------|
+     | ~~~ Broken White Path ~~~                                                                                        |
+     |------------------------------------------------------------------------------------------------------------------|
+     | Expomemos el atributo de salida con el decorador notificarEditarPost()                                           |
+     |------------------------------------------------------------------------------------------------------------------*/
+    @Output() postIdParaEditar: EventEmitter<Post> = new EventEmitter();
+
+    notificarEditarPost(post: Post): void {
+        this.postIdParaEditar.emit(post);
+    }
+
 }

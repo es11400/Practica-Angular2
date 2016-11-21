@@ -38,4 +38,8 @@ export class PostsListComponent {
         this.router.navigate(['/posts', post.id]);
     }
 
+    editPostId(post: Post) {
+        this.router.navigate(['/edit-story', post.id])
+    }
+
 }

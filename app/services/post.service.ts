@@ -102,7 +102,7 @@ export class PostService {
                        })});
                        
     }
- // console.log(`${c.id} / ${categoria}`);
+ 
     getPostDetails(id: number): Observable<Post> {
         return this._http
                    .get(`${this._backendUri}/posts/${id}`)
