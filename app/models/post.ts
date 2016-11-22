@@ -12,9 +12,9 @@ export class Post {
         public publicationDate: number,
         public categories: Category[],
         public author: User,
-        public likes: number
+        public likes: Number[]
     ) { }
-
+ 
     static fromJson(json: any): Post {
         return new Post(
             json.id,
@@ -37,7 +37,7 @@ export class Post {
     }
 
     static defaultPost(): Post {
-        return new Post(0,"","","","",0,[],User.defaultUser(),0);
+        return new Post(0,"","","","",0,[],User.defaultUser(),[]);
             
     }
 }

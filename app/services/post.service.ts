@@ -160,11 +160,11 @@ export class PostService {
 
     getSearchPosts(busqueda: string): Observable<Post[]> {
         
-        /*--------------------------------------------------------------------------------------------------|
-         | ~~~ Red Wine Path ~~~                                                                            |
-         |--------------------------------------------------------------------------------------------------|
-         |//console.log(`Busqueda: ${busqueda} --> Title: ${p.title} --> ${p.title.indexOf(busqueda)} `);   |
-         |--------------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------------------------|
+    | ~~~ Red Wine Path ~~~                                                                             |
+    |---------------------------------------------------------------------------------------------------|
+    |//console.log(`Busqueda: ${busqueda} --> Title: ${p.title} --> ${p.title.indexOf(busqueda)} `);    |
+    |--------------------------------------------------------------------------------------------------*/
         return this._http
                    .get(`${this._backendUri}/posts?publicationDate_lte=${Date.now()}&_sort=publicationDate&_order=DESC`)
                    .map((response: Response) => {
@@ -172,5 +172,19 @@ export class PostService {
                         return posts.filter((p: Post) => p.title.indexOf(busqueda) != -1 || p.intro.indexOf(busqueda) != -1 || p.body.indexOf(busqueda) != -1 );
                     });
                        
+    }
+
+    updateLikesPosts(post: Post): Observable<Post> {
+        /*--------------------------------------------------------------------------------------------------|
+        | ~~~ Brick Red Path ~~~                                                                            |
+        |---------------------------------------------------------------------------------------------------|
+        | Actualizamos los likes de un post determinado                                                     |
+        |--------------------------------------------------------------------------------------------------*/
+        return this._http
+                   .put(`${this._backendUri}/posts/${post.id}`, post)
+                   .map((respuesta: Response) => {
+                       let json = respuesta.json();
+                       return Post.fromJson(json);
+                   });
     }
 }

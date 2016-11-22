@@ -1,0 +1,10 @@
+.likes {
+    display: inline-block;
+}
+
+.likes {
+    float: right;
+    font-size: 20px;
+    color: darkred;
+    cursor: pointer;
+}

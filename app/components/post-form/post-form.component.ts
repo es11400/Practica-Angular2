@@ -26,7 +26,10 @@ export class PostFormComponent implements OnInit {
         //this.nowDatetimeLocal = this._formatDateToDatetimeLocal(new Date());
         this._postService.generarRutaImagen().subscribe(ruta => this.rutaImagen = ruta);
         this._activatedRoute.data.forEach((data: { post: Post}) => this.post = data.post);
+
         if ( this.post == null) {
+
+            console.log("Post NULO");
             this.post = Post.defaultPost();
             this.post.publicationDate = this._getPostPublicationDate(Date.now().toString());
         }
@@ -73,9 +76,10 @@ export class PostFormComponent implements OnInit {
          | nada a lo indicado en el formulario. Por tanto, pon especial atención a que los nombres indicados en los    |
          | distintos elementos del formulario se correspondan con las propiedades de la clase Post.                    |
          |-------------------------------------------------------------------------------------------------------------*/
-
+        
         let post: Post = Post.fromJson(form.value);
-        post.likes = 0;
+        post.id = this.post.id;
+        post.likes = [];
         post.author = User.defaultUser();
         post.categories = [];
         post.publicationDate = this._getPostPublicationDate(form.value.publicationDate);

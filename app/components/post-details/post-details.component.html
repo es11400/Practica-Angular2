@@ -20,16 +20,7 @@
         -->
         <span class="date">{{ post.publicationDate | FromNow }}</span>
     </div>
-    <div class="likes" (click)="notificarLikePost(post)">
-        <i class="fa"
-            aria-hidden="true"
-            [ngClass]="{
-                        'fa-heart': !post.likes.indexOf(1),
-                        'fa-heart-o': post.likes.indexOf(1)
-                        }"> 
-            <span *ngIf="post.likes.length > 0">{{ post.likes.length }}</span>
-        </i>
-    </div>
+    <post-likes [post]="post"></post-likes>
     <div class="edit" (click)="notificarEditarPost(post)">
         <i *ngIf="post.author.id === 1" class="fa fa-pencil-square" aria-hidden="true"></i>
     </div>
