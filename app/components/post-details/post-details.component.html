@@ -20,7 +20,7 @@
         -->
         <span class="date">{{ post.publicationDate | FromNow }}</span>
     </div>
-    <div class="likes">
+    <div class="likes" (click)="notificarLikePost(post)">
         <i class="fa"
             aria-hidden="true"
             [ngClass]="{

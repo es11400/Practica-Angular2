@@ -306,6 +306,23 @@
       },
       "likes": 0,
       "id": 13
+    },
+    {
+      "title": "Prueba con categorias vacias - Modificado",
+      "intro": "historia con categorias vacias - modificado",
+      "body": "Esta es la historia de las categorias vacias - Modificado",
+      "media": "http://lorempixel.com/640/480",
+      "publicationDate": 1479778249871,
+      "categories": [],
+      "author": {
+        "id": 1,
+        "name": "KeepCoder",
+        "username": "keepcoder",
+        "email": "keepcoder@postium.com",
+        "avatar": "resources/images/keepcoder.jpg"
+      },
+      "likes": 0,
+      "id": 14
     }
   ]
 }

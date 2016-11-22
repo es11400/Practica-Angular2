@@ -19,7 +19,7 @@
     <input
         type="text"
         name="title"
-        ngModel
+        [(ngModel)]="post.title"
         #titleRef="ngModel"
         required
         placeholder="Título"
@@ -34,7 +34,7 @@
     -->
     <textarea
         name="intro"
-        ngModel
+        [(ngModel)]="post.intro"
         #introRef="ngModel"
         required
         placeholder="Introduce tu historia"
@@ -50,7 +50,7 @@
     -->
     <textarea
         name="body"
-        ngModel
+        [(ngModel)]="post.body"
         #bodyRef="ngModel"
         required
         placeholder="Cuenta tu historia"
@@ -74,7 +74,10 @@
                 type="datetime-local"
                 name="publicationDate"
                 [min]="nowDatetimeLocal"
-                [ngModel]="nowDatetimeLocal">
+                [ngModel]="post.publicationDate | date:'yyyy-MM-ddThh:mm'">
+                <!-- Solo me permite añadir el PIPE 'date' en modo lectura -->
+                <!-- [ngModel]="nowDatetimeLocal" -->
+                >
         </div>
     </div>
     <!--

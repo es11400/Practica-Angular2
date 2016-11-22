@@ -21,7 +21,7 @@ export class EditStoryComponent  {
         this._unsubscribePostCreation();
     }
 
-    createPost(post: Post): void {
+    editPost(post: Post): void {
         this._unsubscribePostCreation();
         this._postSubscription = this._postService.editPost(post).subscribe(() => this._router.navigate(["/"]));
     }

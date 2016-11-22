@@ -49,5 +49,29 @@ export class PostDetailsComponent implements OnInit {
 
         this.router.navigate(['/posts/categories', categoria.id]);
     }
-        
+
+    /*------------------------------------------------------------------------------------------------------------------|
+     | ~~~ Broken White Path ~~~                                                                                        |
+     |------------------------------------------------------------------------------------------------------------------|
+     | Expomemos el atributo de salida con el decorador notificarEditarPost()                                           |
+     |------------------------------------------------------------------------------------------------------------------*/
+    //@Output() postIdParaEditar: EventEmitter<Post> = new EventEmitter();
+
+    notificarEditarPost(post: Post): void {
+        //this.postIdParaEditar.emit(post);
+        this.router.navigate(['/edit-story', post.id]);
+    }
+
+     /*------------------------------------------------------------------------------------------------------------------|
+     | ~~~ Brick red Path ~~~                                                                                        |
+     |------------------------------------------------------------------------------------------------------------------|
+     | Expomemos el atributo de salida con el decorador notificarLikePost()                                           |
+     |------------------------------------------------------------------------------------------------------------------*/
+    //@Output() postIdParaLike: EventEmitter<Post> = new EventEmitter();
+
+    notificarLikePost(post: Post): void {
+      //  this.postIdParaLike.emit(post);
+      console.log("Like");
+    }
+
 }

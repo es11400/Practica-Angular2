@@ -4,6 +4,7 @@ import { FormGroup } from "@angular/forms";
 import { Post } from "../../models/post";
 import { User } from "../../models/user";
 import { PostService } from '../../services/post.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: "post-form",
@@ -12,18 +13,19 @@ import { PostService } from '../../services/post.service';
 })
 export class PostFormComponent implements OnInit {
 
+    post: Post;
     rutaImagen: string = ""
     nowDatetimeLocal: string;
     publicationDateScheduled: boolean = false;
 
     @Output() postSubmitted: EventEmitter<Post> = new EventEmitter();
 
-    constructor(private _postService: PostService) { }
+    constructor(private _postService: PostService, private _activatedRoute: ActivatedRoute) { }
 
     ngOnInit(): void {
-        this.nowDatetimeLocal = this._formatDateToDatetimeLocal(new Date());
-        this._postService.generarRutaImagen()
-                              .subscribe(ruta => this.rutaImagen = ruta);
+        //this.nowDatetimeLocal = this._formatDateToDatetimeLocal(new Date());
+        this._postService.generarRutaImagen().subscribe(ruta => this.rutaImagen = ruta);
+        this._activatedRoute.data.forEach((data: { post: Post}) => this.post = data.post);
     }
 
     private _formatDateToDatetimeLocal(date: Date) {
