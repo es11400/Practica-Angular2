@@ -1,5 +1,5 @@
 import { Category } from "./category";
-import { User } from "./user";
+import { User } from './user';
 
 export class Post {
     
@@ -34,5 +34,10 @@ export class Post {
             posts.push(Post.fromJson(post));
             return posts;
         }, []);
+    }
+
+    static defaultPost(): Post {
+        return new Post(0,"","","","",0,[],User.defaultUser(),0);
+            
     }
 }

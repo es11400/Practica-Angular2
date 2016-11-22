@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
-import { Post } from "../../models/post";
+import { Post } from '../../models/post';
 import { User } from "../../models/user";
 import { PostService } from '../../services/post.service';
 import { ActivatedRoute } from '@angular/router';
@@ -26,6 +26,10 @@ export class PostFormComponent implements OnInit {
         //this.nowDatetimeLocal = this._formatDateToDatetimeLocal(new Date());
         this._postService.generarRutaImagen().subscribe(ruta => this.rutaImagen = ruta);
         this._activatedRoute.data.forEach((data: { post: Post}) => this.post = data.post);
+        if ( this.post == null) {
+            this.post = Post.defaultPost();
+            this.post.publicationDate = this._getPostPublicationDate(Date.now().toString());
+        }
     }
 
     private _formatDateToDatetimeLocal(date: Date) {
