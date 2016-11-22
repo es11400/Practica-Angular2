@@ -10,7 +10,6 @@ import { PostService } from "../../services/post.service";
     styleUrls: ["./app/components/new-story/new-story.component.css"]
 })
 export class NewStoryComponent implements OnDestroy {
-
     private _postSubscription: Subscription;
 
     constructor(

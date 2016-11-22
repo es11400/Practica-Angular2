@@ -6,6 +6,7 @@ import "rxjs/add/operator/map";
 import { BackendUri, DireccionFakerImage } from './settings.service';
 import { Post } from "../models/post";
 import { Category } from '../models/category';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable()
 export class PostService {
@@ -150,7 +151,7 @@ export class PostService {
     | ~~~ Broken White Path ~~~ Edicion de posts                                                    |
     |----------------------------------------------------------------------------------------------|*/
         return this._http
-                   .post(`${this._backendUri}/posts`, post)
+                   .put(`${this._backendUri}/posts/${post.id}`, post)
                    .map((respuesta: Response) => {
                        let json = respuesta.json();
                        return Post.fromJson(json);
@@ -164,7 +165,6 @@ export class PostService {
          |--------------------------------------------------------------------------------------------------|
          |//console.log(`Busqueda: ${busqueda} --> Title: ${p.title} --> ${p.title.indexOf(busqueda)} `);   |
          |--------------------------------------------------------------------------------------------------*/
-        console.log(busqueda);
         return this._http
                    .get(`${this._backendUri}/posts?publicationDate_lte=${Date.now()}&_sort=publicationDate&_order=DESC`)
                    .map((response: Response) => {
