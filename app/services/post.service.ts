@@ -156,4 +156,21 @@ export class PostService {
                        return Post.fromJson(json);
                    });
     }
+
+    getSearchPosts(busqueda: string): Observable<Post[]> {
+        
+        /*--------------------------------------------------------------------------------------------------|
+         | ~~~ Red Wine Path ~~~                                                                            |
+         |--------------------------------------------------------------------------------------------------|
+         |//console.log(`Busqueda: ${busqueda} --> Title: ${p.title} --> ${p.title.indexOf(busqueda)} `);   |
+         |--------------------------------------------------------------------------------------------------*/
+        console.log(busqueda);
+        return this._http
+                   .get(`${this._backendUri}/posts?publicationDate_lte=${Date.now()}&_sort=publicationDate&_order=DESC`)
+                   .map((response: Response) => {
+                        let posts = Post.fromJsonToList(response.json());
+                        return posts.filter((p: Post) => p.title.indexOf(busqueda) != -1 || p.intro.indexOf(busqueda) != -1 || p.body.indexOf(busqueda) != -1 );
+                    });
+                       
+    }
 }

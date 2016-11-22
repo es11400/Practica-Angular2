@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
+import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { Observable } from "rxjs/Observable";
 
 import { Post } from '../models/post';
@@ -11,7 +11,7 @@ export class PostsResolve implements Resolve<Post[]> {
     constructor(private _postService: PostService) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<Post[]> {
-        
+        //console.log(route.params);
         /*-----------------------------------------------------------------------------------------|
          | ~~~ Red Path ~~~                                                                        |
          |-----------------------------------------------------------------------------------------|
@@ -32,6 +32,13 @@ export class PostsResolve implements Resolve<Post[]> {
          |-----------------------------------------------------------------------------------------*/
         if ( route.params['categoryId'] != null ) {
             return this._postService.getCategoryPosts(route.params['categoryId']);
+        } else 
+        /*-----------------------------------------------------------------------------------------|
+         | ~~~ Red Wine Path ~~~                                                                   |
+         |-----------------------------------------------------------------------------------------|
+         |-----------------------------------------------------------------------------------------*/
+        if ( route.params['busqueda'] != null ) {
+            return this._postService.getSearchPosts(route.params['busqueda']);
         } else {
             return this._postService.getPosts();
         }

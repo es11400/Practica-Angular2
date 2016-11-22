@@ -9,6 +9,7 @@ import { UserPostsComponent } from "./components/user-posts/user-posts.component
 import { PostDetailsResolve } from "./services/post-details-resolve.service";
 import { PostsResolve } from "./services/posts-resolve.service";
 import { EditStoryComponent } from "./components/edit-story/edit-story.component";
+import { SearchPostsComponent } from "./components/search-posts/search-posts.component";
 
 const routes: Routes = [
     {
@@ -28,6 +29,13 @@ const routes: Routes = [
     {
         path: "posts/categories/:categoryId",
         component: CategoryPostsComponent,
+        resolve: {
+            posts: PostsResolve
+        }
+    },
+    {
+        path: "posts/search/:busqueda",
+        component: SearchPostsComponent,
         resolve: {
             posts: PostsResolve
         }

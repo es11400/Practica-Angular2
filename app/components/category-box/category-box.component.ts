@@ -24,8 +24,5 @@ export class CategoryBoxComponent {
     notificarCategoriaIdSeleccionada(categoria: Category): void {
         this.categoriaIdSeleccionada.emit(categoria);
     }
-    // notificarPostCategoriaSeleccionada(categoria: number) {
-    //     console.log(`Categoria: ${categoria}`);
-    // }
     
 }
